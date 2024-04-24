@@ -21,7 +21,6 @@ class _SignUpPageState extends State<SignUpPage> {
   GoogleMapController? mapController;
   LatLng selectedLatLng = LatLng(0, 0);
 
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -176,160 +175,202 @@ class _SignUpPageState extends State<SignUpPage> {
                         showModalBottomSheet(
                           context: context,
                           builder: (BuildContext context) {
-                            return StatefulBuilder(
-                              builder:
-                                  (BuildContext context, StateSetter setState) {
-                                return Container(
-                                  padding: EdgeInsets.all(20.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      Text(
-                                        'Set Availability',
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 20.0,
-                                          fontFamily: 'Lobster',
-                                          fontWeight: FontWeight.bold,
+                            return SingleChildScrollView(
+                              child: StatefulBuilder(
+                                builder: (BuildContext context,
+                                    StateSetter setState) {
+                                  return Container(
+                                    padding: EdgeInsets.all(20.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          'Set Availability',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 20.0,
+                                            fontFamily: 'Lobster',
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.left,
                                         ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Column(
-                                        children: [
-                                          RadioListTile(
-                                            title: Text('Monday to Friday'),
-                                            value: 'Monday to Friday',
-                                            groupValue: selectedDay,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                selectedDay = value.toString();
-                                              });
-                                            },
-                                          ),
-                                          RadioListTile(
-                                            title:
-                                                Text('Monday, Tuesday, Friday'),
-                                            value: 'Monday, Tuesday, Friday',
-                                            groupValue: selectedDay,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                selectedDay = value.toString();
-                                              });
-                                            },
-                                          ),
-                                          RadioListTile(
-                                            title: Text('All Time Open'),
-                                            value: 'All Time Open',
-                                            groupValue: selectedDay,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                selectedDay = value.toString();
-                                              });
-                                            },
-                                          ),
-                                          RadioListTile(
-                                            title: Text('Custom Add'),
-                                            value: 'Custom Add',
-                                            groupValue: selectedDay,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                selectedDay = value.toString();
-                                              });
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 20.0),
-                                      Text(
-                                        'Set Time',
-                                        style: TextStyle(
-                                          color: Colors.red,
-                                          fontSize: 20.0,
-                                          fontFamily: 'Lobster',
-                                          fontWeight: FontWeight.bold,
+                                        Column(
+                                          children: [
+                                            RadioListTile(
+                                              title: Text('Monday to Friday'),
+                                              value: 'Monday to Friday',
+                                              groupValue: selectedDay,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  selectedDay =
+                                                      value.toString();
+                                                });
+                                              },
+                                            ),
+                                            RadioListTile(
+                                              title: Text(
+                                                  'Monday, Tuesday, Friday'),
+                                              value: 'Monday, Tuesday, Friday',
+                                              groupValue: selectedDay,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  selectedDay =
+                                                      value.toString();
+                                                });
+                                              },
+                                            ),
+                                            RadioListTile(
+                                              title: Text('All Time Open'),
+                                              value: 'All Time Open',
+                                              groupValue: selectedDay,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  selectedDay =
+                                                      value.toString();
+                                                });
+                                              },
+                                            ),
+                                            RadioListTile(
+                                              title: Text('Custom Add'),
+                                              value: 'Custom Add',
+                                              groupValue: selectedDay,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  selectedDay =
+                                                      value.toString();
+                                                });
+                                              },
+                                            ),
+                                          ],
                                         ),
-                                        textAlign: TextAlign.left,
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: TextField(
-                                              controller: fromTimeController,
-                                              decoration: InputDecoration(
-                                                labelText: 'From',
-                                                border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.0),
-                                                  borderSide: BorderSide(
+                                        SizedBox(height: 20.0),
+                                        Text(
+                                          'Set Time',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 20.0,
+                                            fontFamily: 'Lobster',
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.left,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: TextField(
+                                                controller: fromTimeController,
+                                                decoration: InputDecoration(
+                                                  labelText: 'From',
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15.0),
+                                                    borderSide: BorderSide(
                                                       color: Colors.green,
-                                                      width: 2.0),
+                                                      width: 2.0,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 10.0),
+                                            Expanded(
+                                              child: TextField(
+                                                controller: toTimeController,
+                                                decoration: InputDecoration(
+                                                  labelText: 'To',
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15.0),
+                                                    borderSide: BorderSide(
+                                                      color: Colors.green,
+                                                      width: 2.0,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(height: 10.0),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: TextButton(
+                                              onPressed: () async {
+                                                // Show time picker and wait for user input
+                                                TimeOfDay? selectedTime = await showTimePicker(
+                                                  context: context,
+                                                  initialTime: TimeOfDay.now(),
+                                                );
+
+                                                // Handle the selected time
+                                                if (selectedTime != null) {
+                                                  print('Selected time: $selectedTime');
+                                                  // You can use the selectedTime however you need
+                                                }
+                                              },
+                                              style: ButtonStyle(
+                                                backgroundColor: MaterialStateProperty.all<Color>(Color(0xFFF2F2F2)),
+                                              ),
+                                              child: Text(
+                                                'Custom Add Time',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 16.0,
                                                 ),
                                               ),
                                             ),
                                           ),
-                                          SizedBox(width: 10.0),
-                                          Expanded(
-                                            child: TextField(
-                                              controller: toTimeController,
-                                              decoration: InputDecoration(
-                                                labelText: 'To',
-                                                border: OutlineInputBorder(
+                                        ),
+
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: ElevatedButton(
+                                            onPressed: () {
+                                              if (selectedDay.isNotEmpty) {
+                                                String availability =
+                                                    '$selectedDay From: ${fromTimeController.text} To: ${toTimeController.text}';
+                                                availabilityController.text =
+                                                    availability;
+                                                Navigator.pop(context);
+                                              }
+                                            },
+                                            style: ButtonStyle(
+                                              minimumSize: MaterialStateProperty
+                                                  .all<Size>(
+                                                Size(double.infinity, 50),
+                                              ),
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                      Color>(Colors.red),
+                                              shape: MaterialStateProperty.all<
+                                                  RoundedRectangleBorder>(
+                                                RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           15.0),
-                                                  borderSide: BorderSide(
-                                                      color: Colors.green,
-                                                      width: 2.0),
+                                                  side: BorderSide(
+                                                      color: Colors.red),
                                                 ),
                                               ),
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(height: 10.0),
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: ElevatedButton(
-                                          onPressed: () {
-                                            if (selectedDay.isNotEmpty) {
-                                              String availability =
-                                                  '$selectedDay From: ${fromTimeController.text} To: ${toTimeController.text}';
-                                              availabilityController.text =
-                                                  availability;
-                                              Navigator.pop(context);
-                                            }
-                                          },
-                                          style: ButtonStyle(
-                                            minimumSize:
-                                                MaterialStateProperty.all<Size>(
-                                                    Size(double.infinity, 50)),
-                                            backgroundColor:
-                                                MaterialStateProperty.all<
-                                                    Color>(Colors.red),
-                                            shape: MaterialStateProperty.all<
-                                                RoundedRectangleBorder>(
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(15.0),
-                                                side: BorderSide(
-                                                    color: Colors.red),
+                                            child: Text(
+                                              'ADD',
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 18.0,
                                               ),
                                             ),
                                           ),
-                                          child: Text(
-                                            'ADD',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 18.0,
-                                            ),
-                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
                             );
                           },
                         );
@@ -372,7 +413,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   style: ButtonStyle(
                     minimumSize: MaterialStateProperty.all<Size>(
                         Size(double.infinity, 50)),
-                    backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.red),
                   ),
                   child: Text(
                     'Sign Up',
@@ -382,7 +424,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),
@@ -420,11 +461,10 @@ class _SignUpPageState extends State<SignUpPage> {
       setState(() {
         selectedLatLng = pickedLocation;
         addressController.text =
-        'Lat: ${selectedLatLng.latitude}, Lng: ${selectedLatLng.longitude}';
+            'Lat: ${selectedLatLng.latitude}, Lng: ${selectedLatLng.longitude}';
       });
     }
   }
-
 }
 
 void main() {
