@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -16,6 +17,10 @@ class _SignUpPageState extends State<SignUpPage> {
   bool allTimeOpen = false;
   bool customAdd = false;
   String selectedDay = '';
+
+  GoogleMapController? mapController;
+  LatLng selectedLatLng = LatLng(0, 0);
+
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
@@ -148,13 +153,17 @@ class _SignUpPageState extends State<SignUpPage> {
                   controller: addressController,
                   decoration: InputDecoration(
                     labelText: 'Address',
-                    prefixIcon: Icon(Icons.home),
+                    prefixIcon: IconButton(
+                      icon: Icon(Icons.home),
+                      onPressed: _selectAddressFromMap,
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(15.0),
                       borderSide: BorderSide(color: Colors.green, width: 2.0),
                     ),
                   ),
                 ),
+
                 SizedBox(height: 20.0),
                 // Availability text field
                 TextField(
@@ -381,6 +390,41 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
   }
+
+  Future<void> _selectAddressFromMap() async {
+    // Open a full-screen map
+    final LatLng pickedLocation = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (ctx) => Scaffold(
+          appBar: AppBar(title: Text('Select Address')),
+          body: GoogleMap(
+            initialCameraPosition: CameraPosition(
+              target: LatLng(37.42796133580664, -122.085749655962),
+              zoom: 16,
+            ),
+            onMapCreated: (GoogleMapController controller) {
+              mapController = controller;
+            },
+            onTap: (LatLng latLng) {
+              setState(() {
+                selectedLatLng = latLng;
+              });
+              Navigator.of(ctx).pop(selectedLatLng);
+            },
+          ),
+        ),
+      ),
+    );
+    // Update the address in the text field
+    if (pickedLocation != null) {
+      setState(() {
+        selectedLatLng = pickedLocation;
+        addressController.text =
+        'Lat: ${selectedLatLng.latitude}, Lng: ${selectedLatLng.longitude}';
+      });
+    }
+  }
+
 }
 
 void main() {
