@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "458207981918",
+    "project_id": "terabitit-dd771",
+    "storage_bucket": "terabitit-dd771.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458207981918:android:39c4614903179fe89f1fcf",
+        "android_client_info": {
+          "package_name": "com.example.terabit_it"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA63er3dghxmlZFMAho1Oqj4hwtAv_129o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
